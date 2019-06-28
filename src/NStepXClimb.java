@@ -8,13 +8,13 @@ public class NStepXClimb
 
     public static void main(String[] args)
     {
-        x = new Integer[]{1, 2};
-        steps = 4;
+        x = new Integer[]{1, 3, 5};
+        steps = 10;
         resultados = calcularNStepXClimb(steps, x);
         resultados.forEach((k, v) -> {
             Map<String, Object> mapacomparacion;
             mapacomparacion = (Map<String, Object>) v;
-            System.out.println(k+mapacomparacion.get("Combinacion"));
+            System.out.println(k + mapacomparacion.get("Combinacion"));
         });
     }
 
@@ -45,16 +45,18 @@ public class NStepXClimb
                         mapacomparacion = (Map<String, Object>) v;
                         String a = mapacomparacion.get("Combinacion").toString();
                         String b = solucion.toString();
-                        if (a.equals(b) )
+                        if (a.equals(b))
                         {
                             existe[0] = true;
                         }
                     });
                     if (existe[0])
                     {
-                        solucion.removeAll(solucion);
-                        solucion.add(x[aux]);
-                        suma = x[aux];
+                        //                        solucion.removeAll(solucion);
+                        //                        solucion.add(x[aux]);
+                        //                        suma = x[aux];
+                        solucion.remove(solucion.size() - 1);
+                        suma -= x[aux2];
                         continue;
                     }
                     res.clear();
@@ -65,13 +67,13 @@ public class NStepXClimb
                     solucion.removeAll(solucion);
                     solucion.add(x[aux]);
                     suma = x[aux];
-                    aux2--;
+                    aux2 = 0;
                     continue;
                 }
                 else if (suma < steps)
                 {
                     solucion.add(x[aux2]);
-                    aux2--;
+                    aux2 = -1;
                 }
                 else
                 {
